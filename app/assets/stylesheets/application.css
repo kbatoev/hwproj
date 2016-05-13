@@ -99,7 +99,6 @@ h3 {
   background-color: #eeeeee;
 }
 
-
 .glyphicon-remove {
   color: #d9534f;
 }
@@ -131,4 +130,15 @@ h3 {
 .notifications table {
     border-collapse: separate;
     border-spacing: 10px 0;
+}
+
+/* for chat */
+#my_message_text {
+  background-color: #daf2d8;
+  text-align: right;
+}
+
+#collocutor_message_text {
+  background-color: #d6edfa;
+  text-align: left;
 }

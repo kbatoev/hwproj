@@ -1,0 +1,11 @@
+<% if current_user.id != message.user_id %>
+  <strong> <%= message.user.full_name %> </strong>
+  <small><%= message.created_at.strftime("%H:%M %d.%m.%y") %></small>
+  <p id="collocutor_message_text"> <%= message.text %> </p>
+<% else %>
+  <strong class="pull-right"><%= message.user.full_name %></strong>
+  <small>
+  <%= message.created_at.strftime("%H:%M %d.%m.%y") %></small>
+  <p id="my_message_text"> <%= message.text %> </p>
+<% end %>
+  

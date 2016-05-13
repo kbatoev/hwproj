@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   include Markdown
   helper_method :markdown
-  before_action :set_task, only: [ :show, :update ]
+  before_action :set_task, only: [ :show, :update, :switch_chat]
 
   def show
     if (not signed_in?)
@@ -20,6 +20,7 @@ class TasksController < ApplicationController
     else
       raise ActionController::RoutingError.new('Not Found')
     end
+
     if @is_teacher && @submission
       Notification.make_read(user: @submission.teacher, task: @task)
     elsif @is_student
@@ -45,5 +46,8 @@ class TasksController < ApplicationController
   private
     def set_task
       @task = Task.find(params[:id])
+    end
+
+    def switch_chat
     end
 end

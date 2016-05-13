@@ -18,7 +18,14 @@ Rails.application.routes.draw do
   resources :homeworks
 
   resources :invitations, only: [ :new, :create, :edit, :update ]
-  resources :tasks, only: [ :show, :update ]
+  resources :tasks, only: [ :show, :update ] do
+    member do
+      get 'switch_chat'
+    end
+  end
+
+  resources :messages
+  
   resources :submissions, only: [ :new, :create, :index, :update ]
   resources :problems, only: [ :show ]
   resources :notes
