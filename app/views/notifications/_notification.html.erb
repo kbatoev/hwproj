@@ -18,7 +18,7 @@
           <tr>
             <td>
               <% if notification.added_message? %>
-                К задаче <%= link_to task.name, task, chat: 'on' %>
+                К задаче <%= link_to task.name, task_path(task, chat: 'on') %>
                 добавлено
                 <%= notification.messages_count %>
                 <%= notification.new_messages_form %>
@@ -48,7 +48,8 @@
           Тест: <%= link_to "задача #{task.problem.number}", task %> принята
         <% end %>
       <% when 'added_message' %>
-        К задаче <%= link_to task.name, task, chat: 'on' %> добавлено <%= notification.messages_count %> <%= notification.new_messages_form %>
+        К задаче <%= link_to task.name, task_path(task, chat: 'on') %> добавлено 
+        <%= notification.messages_count %> <%= notification.new_messages_form %>
       <% else %>
         <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
         <% if notification.added_comments? %>
