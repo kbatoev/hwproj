@@ -17,10 +17,17 @@
           </tr>
           <tr>
             <td>
-              <%= notification.versions_count%>
-              <%= notification.new_versions_form%>
-              задачи
-              <%= link_to task.name, task%>
+              <% if notification.added_message? %>
+                К задаче <%= link_to task.name, task, chat: 'on' %>
+                добавлено
+                <%= notification.messages_count %>
+                <%= notification.new_messages_form %>
+              <% else %>
+                <%= notification.versions_count%>
+                <%= notification.new_versions_form%>
+                задачи
+                <%= link_to task.name, task%>
+              <% end %>
             </td>
           </tr>
         </table>
@@ -33,13 +40,15 @@
 
   <% else %>
     <span><%= check_box_tag "#{notification.id}", 1, notification.is_read, title: "Отметить как прочитанное", data: { behavior: "update-is_read" } %></span>
-      <% if notification.task_accepted? %>
+      <% case notification.event_type when 'task_accepted' %>
         <span style="color:#5cb85c" class="glyphicon glyphicon-ok"></span>
         <% if task.job.assignment.assignment_type == "homework" %>
           Задача <%= link_to task.name, task %> принята
         <% else %>
           Тест: <%= link_to "задача #{task.problem.number}", task %> принята
         <% end %>
+      <% when 'added_message' %>
+        К задаче <%= link_to task.name, task, chat: 'on' %> добавлено <%= notification.messages_count %> <%= notification.new_messages_form %>
       <% else %>
         <span style="color:#f0ad4e" class="glyphicon glyphicon-exclamation-sign"></span>
         <% if notification.added_comments? %>
