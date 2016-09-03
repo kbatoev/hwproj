@@ -116,7 +116,7 @@ h3 {
 } 
 
 .glyphicon-ok-sign {
-    color: #5cb85c;
+  color: #5cb85c;
 }
 
 .read_notification {
@@ -132,13 +132,12 @@ h3 {
     border-spacing: 10px 0;
 }
 
-/* for chat */
-#my_message_text {
+#owners_message_decoration {
   background-color: #daf2d8;
   text-align: right;
 }
 
-#collocutor_message_text {
+#collocutors_message_decoration {
   background-color: #d6edfa;
   text-align: left;
 }
