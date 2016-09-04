@@ -26,7 +26,10 @@ class TasksController < ApplicationController
     elsif @is_student
       Notification.make_read(user: @student.user, task: @task)
     end
-
+    
+    @is_chat_shown = params[:chat] == 'on'
+    @chat_button_message = 'Показать чат'
+    @chat_button_message = 'Скрыть чат' if @is_chat_shown
   end
 
   def update
@@ -47,12 +50,6 @@ class TasksController < ApplicationController
   private
     def set_task
       @task = Task.find(params[:id])
-      @is_chat_shown = params[:chat] == 'on'
-      if @is_chat_shown
-        @chat_button_message = 'Скрыть чат'
-      else
-        @chat_button_message = 'Показать чат'
-      end
     end
 
     def switch_chat
