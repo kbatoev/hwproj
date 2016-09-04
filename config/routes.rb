@@ -24,7 +24,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :messages
+  resources :messages do
+    collection { get :events }
+  end
   
   resources :submissions, only: [ :new, :create, :index, :update ]
   resources :problems, only: [ :show ]
