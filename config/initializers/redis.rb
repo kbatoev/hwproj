@@ -1,13 +1,7 @@
-$redis = Redis.new(:host => 'localhost', :port => 3000)
+Redis::Client::DEFAULTS[:host] = 'localhost'
+Redis::Client::DEFAULTS[:port] = '3000'
 
-if defined?(Unicorn)
-  Unicorn.on_event(:starting_worker_process) do |forked|
-    if forked
-      $redis.client.disconnect
-      $redis = Redis.new(:host => 'localhost', :port => 3000)
-      Rails.logger.info "Reconnecting to redis"
-    else
-      # We're in conservative spawning mode. We don't need to do anything.
-    end
-  end
+if ENV["REDISCLOUD_URL"]
+  uri = URI.parse(ENV["REDISCLOUD_URL"])
+  $redis = Redis.new(host: uri.host, port: uri.port)
 end
