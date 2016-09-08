@@ -256,6 +256,7 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     redcarpet (3.0.0)
+    redis (3.3.1)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -328,6 +329,7 @@ DEPENDENCIES
   rails (= 4.1.4)
   rails_12factor
   redcarpet (~> 3.0.0)
+  redis (~> 3.2)
   rest-client
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
