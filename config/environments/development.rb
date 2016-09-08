@@ -42,6 +42,6 @@ Rails.application.configure do
   config.action_mailer.default :charset => "utf-8"
 
   # Redis default server
-  ENV["REDIS_URL"] = 'redis://localhost:3000'
+  ENV["REDIS_URI"] = 'redis://localhost:3000'
 
 end

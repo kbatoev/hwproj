@@ -8,8 +8,12 @@ before_fork do |server, worker|
     Process.kill 'QUIT', Process.pid
   end
 
-  defined?(ActiveRecord::Base) and
+  defined?(ActiveRecord::Base)
     ActiveRecord::Base.connection.disconnect!
+  end
+
+  $redis.quit
+  Rails.logger.info('Disconnected from Redis')
 end
 
 after_fork do |server, worker|
@@ -17,6 +21,10 @@ after_fork do |server, worker|
     puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
   end
 
-  defined?(ActiveRecord::Base) and
+  defined?(ActiveRecord::Base) 
     ActiveRecord::Base.establish_connection
+  end
+
+  $redis = Redis.new(:host => 'localhost', :port => 3000)
+  Rails.logger.info('Connected to Redis')
 end
